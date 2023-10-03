@@ -50,21 +50,22 @@ else
 	@echo > $(NULLDEV)
 endif
 
-vmbas.o: vmbas.asm
-	$(AS) vmbas.asm -o vmbas.o
-
 vmbas.bin: vmbas.o
 	$(CL) -t kim1 -C kim1-60k.cfg -Oi -o vmbas.bin vmbas.o
 
 vmbas.hex: vmbas.bin
 	srec_cat vmbas.bin -binary -offset 0x4270 -o vmbas.hex -Intel -address-length=2
 
+vmbas.o: vmbas.asm
+	$(AS) vmbas.asm -o vmbas.o
+
 kb9.hex: kb9.bin
-	srec_cat vmbas.bin -binary -offset 0x2000 -o vmbas.hex -Intel -address-length=2
+	srec_cat kb9.bin -binary -offset 0x2000 -o kb9.hex -Intel -address-length=2
 
 clean:
-	@$(DEL) vmbas.o      2>$(NULLDEV)
-	@$(DEL) vmbas.hex    2>$(NULLDEV)
-	@$(DEL) kb9.hex      2>$(NULLDEV)
+	@$(DEL) vmbas.o		2>$(NULLDEV)
+	@$(DEL) vmbas.bin	2>$(NULLDEV)
+	@$(DEL) vmbas.hex    	2>$(NULLDEV)
+	@$(DEL) kb9.hex      	2>$(NULLDEV)
 
 
