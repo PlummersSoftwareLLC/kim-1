@@ -807,17 +807,17 @@ SDTX40: 	LDA 	#0 		; SET UP ADDRESS POINTERS FOR MOVE
                 STA 	ADP1+1
                 LDA 	#<(CHHI*40)
                 STA 	ADP1
-                LDA 	#<NSCRL 	; SET NUMBER OF LOCATIONS TO MOVE
+                LDA 	#<(NSCRL) 	; SET NUMBER OF LOCATIONS TO MOVE
                 STA 	DCNT1 		; LOW PART
-                LDA 	#>NSCRL 	; HIGH PART
+                LDA 	#>(NSCRL) 	; HIGH PART
                 STA 	DCNT1+1
                 JSR 	FMOVE		; EXECUTE MOVE USING AN OPTIMIZED, HIGH
                                         ; SPEED MEMORY MOVE ROUTINE
 
                                         ; CLEAR LAST LINE OF TEXT
-                LDA 	#<(NLIN-1*CHHI*40) ; SET ADDRESS POINTER
+                LDA 	#<(NSCRL)       ; SET ADDRESS POINTER
                 STA 	ADP2 		; LOW BYTE
-                LDA 	#>(NLIN-1*CHHI*40)
+                LDA 	#>(NSCRL)
                 CLC
                 ADC 	VMORG
                 STA 	ADP2+1 		; HIGH BYTE
