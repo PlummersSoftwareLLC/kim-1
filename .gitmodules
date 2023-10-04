@@ -1,0 +1,3 @@
+[submodule "MTU/K-1008-BASIC/msbasic"]
+	path = MTU/K-1008-BASIC/msbasic
+	url = git@github.com:davepl/msbasic.git
