@@ -1,7 +1,11 @@
+# Builds MSBASIC at x2000-x426F
+# Builds K-1008 extensions at x4270-
 
 # Run 'make SYS=<target>'; or, set a SYS env.
 # var. to build for another target system.
 SYS ?= kim1
+
+BASIC_DIR = $(CURDIR)/msbasic
 
 # Just the usual way to find out if we're
 # using cmd.exe to execute make rules.
@@ -59,13 +63,17 @@ vmbas.hex: vmbas.bin
 vmbas.o: vmbas.asm
 	$(AS) vmbas.asm -o vmbas.o
 
-kb9.hex: kb9.bin
-	srec_cat kb9.bin -binary -offset 0x2000 -o kb9.hex -Intel -address-length=2
+kb9.hex: msbasic/tmp/kb9.bin
+	srec_cat msbasic/tmp/kb9.bin -binary -offset 0x2000 -o kb9.hex -Intel -address-length=2
+
+msbasic/tmp/kb9.bin:
+	cd msbasic && ./make.sh
 
 clean:
-	@$(DEL) vmbas.o		2>$(NULLDEV)
-	@$(DEL) vmbas.bin	2>$(NULLDEV)
-	@$(DEL) vmbas.hex    	2>$(NULLDEV)
-	@$(DEL) kb9.hex      	2>$(NULLDEV)
+	@$(DEL) vmbas.o		   		2>$(NULLDEV)
+	@$(DEL) vmbas.bin	    	2>$(NULLDEV)
+	@$(DEL) vmbas.hex    		2>$(NULLDEV)
+	@$(DEL) kb9.hex      		2>$(NULLDEV)
+	@$(DEL) msbasic/tmp/kb9.bin 2>$(NULLDEV)
 
 
