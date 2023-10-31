@@ -63,17 +63,17 @@ vmbas.hex: vmbas.bin
 vmbas.o: vmbas.asm
 	$(AS) vmbas.asm -o vmbas.o
 
-kb9.hex: msbasic/tmp/kb9.bin
-	srec_cat msbasic/tmp/kb9.bin -binary -offset 0x2000 -o kb9.hex -Intel -address-length=2
+kb9.hex: msbasic/orig/kb9.bin
+	srec_cat msbasic/orig/kb9.bin -binary -offset 0x2000 -o kb9.hex -Intel -address-length=2
 
-msbasic/tmp/kb9.bin:
+msbasic/orig/kb9.bin:
 	cd msbasic && ./make.sh
 
 clean:
-	@$(DEL) vmbas.o		   		2>$(NULLDEV)
+	@$(DEL) vmbas.o		   	2>$(NULLDEV)
 	@$(DEL) vmbas.bin	    	2>$(NULLDEV)
 	@$(DEL) vmbas.hex    		2>$(NULLDEV)
 	@$(DEL) kb9.hex      		2>$(NULLDEV)
-	@$(DEL) msbasic/tmp/kb9.bin 2>$(NULLDEV)
+	@$(DEL) msbasic/tmp/kb9.bin 	2>$(NULLDEV)
 
 
