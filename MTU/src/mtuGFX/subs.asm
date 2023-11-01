@@ -51,8 +51,6 @@ LASTROW          = SCREEN + SCREEN_BYTES - BYTESPERCHARROW
 
 .segment "ZEROPAGE"
 
-btpt:           .res 1
-
 dest:
 dest_lo:        .res 1
 dest_hi:        .res 1
@@ -88,6 +86,8 @@ _y1cord:        .res 2
 _y2cord:        .res 2
 _cursorX:       .res 1
 _cursorY:       .res 1
+
+btpt:           .res 1
 
 ; Linedraw
 

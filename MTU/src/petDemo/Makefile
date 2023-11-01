@@ -31,18 +31,12 @@ else
   LD := $(if $(wildcard ../../bin/ld65*),../../bin/ld65,ld65)
 endif
 
-all: kimDemo.hex
+all: petDemo.prg
 
-kimDemo.bin: kimDemo.c 
-	$(CL) -t kim1 --listing kimDemo.lst -C kim1-mtu60k.cfg -o kimDemo.bin kimDemo.c ../mtuGFX/lib/mtuGFX.lib -Ln kimgfx.lbl
-
-kimDemo.hex: kimDemo.bin 
-	srec_cat kimDemo.bin -binary -offset 0x2000 -o kimDemo.hex  -Intel -address-length=2
-
-kimDEMO.ptp: kimDemo.bin
-	srec_cat kimDemo.bin -binary -offset 0x2000 -o kimDemo.ptp -MOS_Technologies
+petDemo.prg: petDemo.c 
+	$(CL) -t pet  -C petDemo.cfg -o petDemo.prg petDemo.c ../mtuGFX/lib/mtuGFX.lib
 
 clean:
-	@$(DEL) *.bin *.lst *.lbl *.ptp *.hex 2>$(NULLDEV)
+	@$(DEL) *.prg *.lst *.lbl *.ptp *.hex 2>$(NULLDEV)
   
 
